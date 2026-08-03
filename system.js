@@ -146,10 +146,10 @@ function setModule(id) {
   renderModule(id);
 }
 
-/* ---------- Tema (dark mode) ---------- */
+/* ---------- Tema (dark mode — escopado ao shell do sistema) ---------- */
 const themeBtn = $("#sys-theme");
 function applyDark(dark) {
-  document.documentElement.classList.toggle("dark", dark);
+  appShell.classList.toggle("is-dark", dark);
   themeBtn.classList.toggle("is-dark", dark);
   store.dark = dark;
 }

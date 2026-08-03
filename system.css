@@ -529,8 +529,8 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ---------- Tema escuro (classe .dark no <html>) ---------- */
-html.dark {
+/* ---------- Tema escuro (escopado ao shell — a landing fica sempre clara) ---------- */
+.app-shell.is-dark {
   --petrol: #E7F0E9;
   --petrol-ink: #E7F0E9;
   --gray-50: #0F172A;
@@ -541,109 +541,109 @@ html.dark {
   --emerald-soft: rgba(22, 179, 112, 0.14);
   color-scheme: dark;
 }
-html.dark .app-shell,
-html.dark .sys-main {
+.app-shell.is-dark,
+.app-shell.is-dark .sys-main {
   background: #0F172A;
 }
-html.dark .sys-head {
+.app-shell.is-dark .sys-head {
   background: rgba(15, 23, 42, 0.8);
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
-html.dark .sys-head h1 { color: #E7F0E9; }
-html.dark .sys-head p { color: #8FA6BC; }
-html.dark .sys-kpi {
+.app-shell.is-dark .sys-head h1 { color: #E7F0E9; }
+.app-shell.is-dark .sys-head p { color: #8FA6BC; }
+.app-shell.is-dark .sys-kpi {
   background: #16233B;
   border-color: rgba(255, 255, 255, 0.07);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 16px 36px -24px rgba(0, 0, 0, 0.5);
 }
-html.dark .sys-kpi strong { color: #E7F0E9; }
-html.dark .sys-kpi span { color: #8FA6BC; }
-html.dark .sys-kpi-ico { background: var(--cb, rgba(22, 179, 112, 0.14)); }
-html.dark .sys-bmap-tile--free { background: #1E293B; color: #64748B; }
-html.dark .sys-bmap-tile--warn { background: rgba(255, 217, 122, 0.14); color: #FFD97A; }
-html.dark .sys-bmap-tile--alert { background: rgba(255, 77, 79, 0.14); color: #FF8587; }
-html.dark .sys-setor-head strong { color: #E7F0E9; }
-html.dark .sys-setor-bar { background: #1E293B; }
-html.dark .sys-setor-meta em { color: #5BDDA4; }
-html.dark .sys-placeholder h2 { color: #E7F0E9; }
-html.dark .sys-placeholder code { background: #1E293B; color: #5BDDA4; }
-html.dark .sys-bell-badge { border-color: #0F172A; }
-html.dark .toast {
+.app-shell.is-dark .sys-kpi strong { color: #E7F0E9; }
+.app-shell.is-dark .sys-kpi span { color: #8FA6BC; }
+.app-shell.is-dark .sys-kpi-ico { background: var(--cb, rgba(22, 179, 112, 0.14)); }
+.app-shell.is-dark .sys-bmap-tile--free { background: #1E293B; color: #64748B; }
+.app-shell.is-dark .sys-bmap-tile--warn { background: rgba(255, 217, 122, 0.14); color: #FFD97A; }
+.app-shell.is-dark .sys-bmap-tile--alert { background: rgba(255, 77, 79, 0.14); color: #FF8587; }
+.app-shell.is-dark .sys-setor-head strong { color: #E7F0E9; }
+.app-shell.is-dark .sys-setor-bar { background: #1E293B; }
+.app-shell.is-dark .sys-setor-meta em { color: #5BDDA4; }
+.app-shell.is-dark .sys-placeholder h2 { color: #E7F0E9; }
+.app-shell.is-dark .sys-placeholder code { background: #1E293B; color: #5BDDA4; }
+.app-shell.is-dark .sys-bell-badge { border-color: #0F172A; }
+.app-shell.is-dark .toast {
   background: rgba(15, 23, 42, 0.92);
 }
 
 /* ---------- Dark mode: componentes do dashboard (herdados do styles.css) ---------- */
-html.dark .card {
+.app-shell.is-dark .card {
   background: #16233B;
   border-color: rgba(255, 255, 255, 0.07);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 16px 36px -24px rgba(0, 0, 0, 0.5);
 }
-html.dark .card:hover {
+.app-shell.is-dark .card:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 24px 48px -24px rgba(0, 0, 0, 0.6);
 }
-html.dark .card-head h4 { color: #E7F0E9; }
-html.dark .card-head p { color: #8FA6BC; }
-html.dark .live-chip {
+.app-shell.is-dark .card-head h4 { color: #E7F0E9; }
+.app-shell.is-dark .card-head p { color: #8FA6BC; }
+.app-shell.is-dark .live-chip {
   background: rgba(22, 179, 112, 0.14);
   color: #5BDDA4;
   border-color: rgba(22, 179, 112, 0.25);
 }
-html.dark .donut-track { stroke: #1E293B; }
-html.dark .donut-center strong { color: #E7F0E9; }
-html.dark .donut-center span { color: #8FA6BC; }
-html.dark .censo-legend strong { color: #E7F0E9; }
-html.dark .censo-legend b { color: #8FA6BC; }
-html.dark .bed-legend span { color: #9FB4C9; }
-html.dark .bed-detail {
+.app-shell.is-dark .donut-track { stroke: #1E293B; }
+.app-shell.is-dark .donut-center strong { color: #E7F0E9; }
+.app-shell.is-dark .donut-center span { color: #8FA6BC; }
+.app-shell.is-dark .censo-legend strong { color: #E7F0E9; }
+.app-shell.is-dark .censo-legend b { color: #8FA6BC; }
+.app-shell.is-dark .bed-legend span { color: #9FB4C9; }
+.app-shell.is-dark .bed-detail {
   background: #0F172A;
   border-color: rgba(255, 255, 255, 0.08);
 }
-html.dark .bed-detail-text strong { color: #E7F0E9; }
-html.dark .bed-detail-text span { color: #8FA6BC; }
-html.dark .bed-detail-icon {
+.app-shell.is-dark .bed-detail-text strong { color: #E7F0E9; }
+.app-shell.is-dark .bed-detail-text span { color: #8FA6BC; }
+.app-shell.is-dark .bed-detail-icon {
   background: rgba(22, 179, 112, 0.14);
   color: #5BDDA4;
 }
-html.dark .resumo-item {
+.app-shell.is-dark .resumo-item {
   background: #0F172A;
   border-color: rgba(255, 255, 255, 0.06);
 }
-html.dark .resumo-item:hover { background: #1E293B; }
-html.dark .resumo-item strong { color: #E7F0E9; }
-html.dark .resumo-item > span { color: #8FA6BC; }
-html.dark .sys-setor-meta span { color: #8FA6BC; }
-html.dark .sys-bmap-label { color: #8FA6BC; }
+.app-shell.is-dark .resumo-item:hover { background: #1E293B; }
+.app-shell.is-dark .resumo-item strong { color: #E7F0E9; }
+.app-shell.is-dark .resumo-item > span { color: #8FA6BC; }
+.app-shell.is-dark .sys-setor-meta span { color: #8FA6BC; }
+.app-shell.is-dark .sys-bmap-label { color: #8FA6BC; }
 /* Ícones com fundo inline --cb: escurecer no dark */
-html.dark .sys-kpi-ico,
-html.dark .resumo-ico {
+.app-shell.is-dark .sys-kpi-ico,
+.app-shell.is-dark .resumo-ico {
   background: rgba(22, 179, 112, 0.12) !important;
 }
-html.dark .sys-kpi-ico { color: #5BDDA4 !important; }
-html.dark .resumo-item:nth-child(2) .resumo-ico,
-html.dark .sys-kpi:nth-child(2) .sys-kpi-ico {
+.app-shell.is-dark .sys-kpi-ico { color: #5BDDA4 !important; }
+.app-shell.is-dark .resumo-item:nth-child(2) .resumo-ico,
+.app-shell.is-dark .sys-kpi:nth-child(2) .sys-kpi-ico {
   background: rgba(13, 43, 78, 0.5) !important;
   color: #9FB4C9 !important;
 }
-html.dark .resumo-item:nth-child(3) .resumo-ico,
-html.dark .sys-kpi:nth-child(3) .sys-kpi-ico {
+.app-shell.is-dark .resumo-item:nth-child(3) .resumo-ico,
+.app-shell.is-dark .sys-kpi:nth-child(3) .sys-kpi-ico {
   background: rgba(255, 217, 122, 0.15) !important;
   color: #FFD97A !important;
 }
-html.dark .resumo-item:nth-child(4) .resumo-ico,
-html.dark .sys-kpi:nth-child(4) .sys-kpi-ico {
+.app-shell.is-dark .resumo-item:nth-child(4) .resumo-ico,
+.app-shell.is-dark .sys-kpi:nth-child(4) .sys-kpi-ico {
   background: rgba(255, 77, 79, 0.15) !important;
   color: #FF8587 !important;
 }
-html.dark .icon-btn {
+.app-shell.is-dark .icon-btn {
   background: #16233B;
   border-color: rgba(255, 255, 255, 0.08);
   color: #E7F0E9;
 }
-html.dark .icon-btn:hover {
+.app-shell.is-dark .icon-btn:hover {
   background: #1E293B;
   box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.4);
 }
-html.dark .sys-chip.is-offline {
+.app-shell.is-dark .sys-chip.is-offline {
   background: rgba(255, 217, 122, 0.15);
   color: #FFD97A;
 }
