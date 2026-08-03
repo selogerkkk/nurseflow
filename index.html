@@ -6,10 +6,17 @@
 <title>NurseFlow — Gestão e Cuidado em Fluidez</title>
 <meta name="description" content="NurseFlow — demo conceitual de gestão hospitalar: censo de leitos, linha do tempo de medicações, registro por voz e sinais vitais.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M24 5C24 5 11 20 11 29.5a13 13 0 0 0 26 0C37 20 24 5 24 5Z' fill='none' stroke='%230D2B4E' stroke-width='3'/%3E%3Cpath d='M15 30h5l2.5-7 4 13 3-6h4' fill='none' stroke='%2316B370' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0D2B4E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NurseFlow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="system.css">
 </head>
 <body>
 
@@ -34,10 +41,10 @@
       <a href="#marca">Marca</a>
     </div>
     <div class="nav-actions">
-      <a href="#dashboard" class="btn btn--primary btn--sm magnetic">
-        <span>Abrir demo</span>
+      <button id="open-system" class="btn btn--primary btn--sm magnetic">
+        <span>Acessar o sistema</span>
         <span class="btn-orb"><svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </a>
+      </button>
       <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
         <span></span><span></span>
       </button>
@@ -47,12 +54,13 @@
 
 <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
   <div class="nav-overlay-inner">
-    <a href="#dashboard" class="ovl-link" style="--i:0"><span>01</span>Dashboard</a>
-    <a href="#app" class="ovl-link" style="--i:1"><span>02</span>App mobile</a>
-    <a href="#registro" class="ovl-link" style="--i:2"><span>03</span>Registro</a>
-    <a href="#medicacoes" class="ovl-link" style="--i:3"><span>04</span>Medicações</a>
-    <a href="#marca" class="ovl-link" style="--i:4"><span>05</span>Marca</a>
-    <p class="ovl-foot" style="--i:5">Gestão e Cuidado em Fluidez</p>
+    <button class="ovl-link ovl-link--cta" id="open-system-ovl" style="--i:0"><span>00</span>Acessar o sistema</button>
+    <a href="#dashboard" class="ovl-link" style="--i:1"><span>01</span>Dashboard</a>
+    <a href="#app" class="ovl-link" style="--i:2"><span>02</span>App mobile</a>
+    <a href="#registro" class="ovl-link" style="--i:3"><span>03</span>Registro</a>
+    <a href="#medicacoes" class="ovl-link" style="--i:4"><span>04</span>Medicações</a>
+    <a href="#marca" class="ovl-link" style="--i:5"><span>05</span>Marca</a>
+    <p class="ovl-foot" style="--i:6">Gestão e Cuidado em Fluidez</p>
   </div>
 </div>
 
@@ -78,12 +86,12 @@
     </p>
 
     <div class="hero-ctas" data-reveal style="--d:240ms">
-      <a href="#dashboard" class="btn btn--primary btn--lg magnetic">
-        <span>Explorar o dashboard</span>
+      <button id="open-system-hero" class="btn btn--primary btn--lg magnetic">
+        <span>Acessar o sistema</span>
         <span class="btn-orb"><svg viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </a>
-      <a href="#app" class="btn btn--ghost btn--lg magnetic">
-        <span>Ver app mobile</span>
+      </button>
+      <a href="#dashboard" class="btn btn--ghost btn--lg magnetic">
+        <span>Ver a demo do dashboard</span>
       </a>
     </div>
 
@@ -895,6 +903,75 @@
 
 </main>
 
+<!-- ============ SISTEMA (SPA) ============ -->
+<div class="app-shell" id="app-shell" aria-hidden="true">
+  <div class="sys-backdrop" id="sys-backdrop"></div>
+
+  <aside class="sys-side" id="sys-side">
+    <div class="sys-side-head">
+      <button class="sys-logo" id="sys-logo-btn" aria-label="NurseFlow — voltar à landing">
+        <span class="logo-mark logo-mark--xs">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M24 5C24 5 11 20 11 29.5a13 13 0 0 0 26 0C37 20 24 5 24 5Z" stroke="currentColor" stroke-width="3.2"/>
+            <path class="logo-pulse" d="M15 30h5l2.5-7 4 13 3-6h4" stroke="#16B370" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="sys-word">Nurse<em>Flow</em></span>
+      </button>
+      <button class="sys-close" id="sys-close" aria-label="Fechar sistema">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <nav class="sys-nav" id="sys-nav" aria-label="Módulos do sistema"></nav>
+
+    <div class="sys-side-foot">
+      <button class="sys-lang" data-toast="Demo: apenas Português disponível">
+        BR
+        <svg viewBox="0 0 24 24" fill="none"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="sys-user">
+        <span class="sys-avatar">BR</span>
+        <div>
+          <strong>Enf. Beatriz Rocha</strong>
+          <span>COREN-SP 284.591</span>
+        </div>
+        <svg class="sys-user-more" viewBox="0 0 24 24" fill="none"><path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+  </aside>
+
+  <div class="sys-main">
+    <header class="sys-head" id="sys-head">
+      <div class="sys-head-left">
+        <button class="icon-btn sys-burger" id="sys-burger" aria-label="Abrir menu de módulos">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <div>
+          <h1 id="sys-title">Dashboard &amp; Censo</h1>
+          <p id="sys-sub">Visão geral da unidade</p>
+        </div>
+      </div>
+      <div class="sys-head-actions">
+        <button class="sys-chip" id="sys-online" title="Online — clique para simular offline">
+          <span class="sys-wifi"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="sys-online-txt" id="sys-online-txt">Online</span>
+        </button>
+        <button class="icon-btn" id="sys-theme" aria-label="Alternar tema" title="Alternar tema">
+          <svg class="ico-sun" viewBox="0 0 24 24" fill="none"><path d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-14v2m0 14v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <svg class="ico-moon" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="icon-btn sys-bell" id="sys-bell" aria-label="Notificações" title="Notificações">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9Zm-4.3 12a2 2 0 0 1-3.4 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <i class="sys-bell-badge" id="sys-bell-badge">248</i>
+        </button>
+      </div>
+    </header>
+
+    <main class="sys-content" id="sys-content"></main>
+  </div>
+</div>
+
 <footer class="footer">
   <svg class="footer-ecg" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0 60 H620 l14 0 12-34 16 66 14-46 10 14 H1440" stroke="rgba(22,179,112,0.35)" stroke-width="2" stroke-linecap="round"/>
@@ -923,5 +1000,7 @@
 <div class="toast-root" id="toast-root" aria-live="polite"></div>
 
 <script src="app.js"></script>
+<script src="modules/dashboard.js"></script>
+<script src="system.js"></script>
 </body>
 </html>

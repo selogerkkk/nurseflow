@@ -1,0 +1,18 @@
+{
+  "name": "NurseFlow — Gestão e Cuidado",
+  "short_name": "NurseFlow",
+  "description": "Sistema de gestão hospitalar: censo de leitos, sinais vitais, prescrição e aprazamento.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F7F9F8",
+  "theme_color": "#0D2B4E",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
