@@ -23,7 +23,10 @@ Depois acesse `http://localhost:8000`.
 ```
 ├── index.html   # Estrutura completa (dashboard + telas mobile)
 ├── styles.css   # Design system, animações e responsividade
-└── app.js       # Interações: voz, steppers, abas, menu, toasts
+├── app.js       # Interações: voz, steppers, abas, menu, toasts
+├── DESIGN.md    # Design system completo e reutilizável
+└── docs/
+    └── features/  # Specs de features investigadas (referência para port)
 ```
 
 ## O que tem na demo
