@@ -187,7 +187,7 @@ $("#sys-bell").addEventListener("click", () => {
   sysToast("248 doses atrasadas precisam de checagem", "warning");
 });
 
-/* ---------- Renderização de módulo (stub — preenchido por cada módulo) ---------- */
+/* ---------- Renderização de módulo (registro — cada módulo se auto-registra) ---------- */
 const SUBTITLES = {
   dashboard: "Visão geral da unidade",
   vitais: "Coleta e histórico de parâmetros",
@@ -198,10 +198,14 @@ const SUBTITLES = {
   infra: "Ordens de serviço e higiene",
   marco: "Enquadramento regulatório",
 };
+const NF_REGISTRY = {};
+function registerModule(id, renderFn) {
+  NF_REGISTRY[id] = renderFn;
+}
 function renderModule(id) {
   const content = $("#sys-content");
   content.innerHTML = "";
-  if (id === "dashboard") renderDashboard(content);
+  if (NF_REGISTRY[id]) NF_REGISTRY[id](content);
   else renderPlaceholder(content, id);
 }
 
@@ -221,7 +225,6 @@ function renderPlaceholder(content, id) {
 
 /* ---------- Init ---------- */
 renderNav();
-setModule("dashboard");
 setOnline(true);
 applyDark(store.dark);
 
@@ -233,7 +236,8 @@ $("#open-system-ovl").addEventListener("click", () => {
   openSystem();
 });
 if (new URLSearchParams(location.search).has("system")) {
-  openSystem(new URLSearchParams(location.search).get("system") || undefined);
+  const target = new URLSearchParams(location.search).get("system") || undefined;
+  setTimeout(() => openSystem(target), 0);
 }
 $("#sys-close").addEventListener("click", closeSystem);
 $("#sys-backdrop").addEventListener("click", closeSide);
@@ -248,3 +252,6 @@ addEventListener("keydown", (e) => {
     else closeSystem();
   }
 });
+
+/* Primeiro render após todos os módulos se registrarem (scripts em ordem) */
+setTimeout(() => setModule("dashboard"), 0);

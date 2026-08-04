@@ -301,3 +301,8 @@ function initCounts(content) {
     tick();
   });
 }
+
+/* Registro no sistema (posterga até system.js carregar — scripts clássicos rodam em ordem) */
+setTimeout(() => {
+  if (typeof registerModule === "function") registerModule("dashboard", renderDashboard);
+}, 0);
