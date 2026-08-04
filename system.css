@@ -666,6 +666,18 @@
 .app-shell.is-dark .bp-sep {
   color: #8FA6BC;
 }
+/* Botões ghost herdados da landing: visíveis no dark */
+.app-shell.is-dark .btn--ghost {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #DCE9F2;
+}
+.app-shell.is-dark .btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.app-shell.is-dark .btn--ghost:disabled {
+  opacity: 0.45;
+}
 
 /* Tema: ícone sol/lua */
 #sys-theme .ico-sun { display: block; }
