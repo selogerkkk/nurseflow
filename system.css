@@ -662,11 +662,44 @@
   color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
-.app-shell.is-dark .step-val {
-  color: #E7F0E9;
-}
 .app-shell.is-dark .bp-sep {
   color: #8FA6BC;
+}
+/* step-val agora é input: zerar aparência nativa e destacar foco */
+.stepper .step-val {
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 0;
+  box-shadow: none;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--petrol);
+  min-width: 44px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  border-radius: 8px;
+  cursor: text;
+  transition: box-shadow 0.25s var(--ease), background 0.25s var(--ease), transform 0.2s var(--ease-bounce);
+}
+.stepper .step-val:hover {
+  background: rgba(22, 179, 112, 0.08);
+}
+.stepper .step-val:focus {
+  background: rgba(22, 179, 112, 0.1);
+  box-shadow: 0 0 0 2px rgba(22, 179, 112, 0.35);
+}
+.stepper--sm .step-val {
+  min-width: 36px;
+  font-size: 14px;
+}
+.app-shell.is-dark .stepper .step-val {
+  color: #FFFFFF;
+}
+.app-shell.is-dark .stepper .step-val:focus {
+  background: rgba(22, 179, 112, 0.16);
+  box-shadow: 0 0 0 2px rgba(22, 179, 112, 0.45);
 }
 /* Botões ghost herdados da landing: visíveis no dark */
 .app-shell.is-dark .btn--ghost {

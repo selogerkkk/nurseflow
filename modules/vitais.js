@@ -153,9 +153,9 @@ function renderVitais(content) {
             ${vitBadge(p)}
           </div>
           <div class="vit-value-row">
-            <div class="stepper" data-min="${p.min}" data-max="${p.max}" data-step="${p.step}" data-comma="${p.dec ? "1" : ""}">
+            <div class="stepper" data-key="${p.key}" data-min="${p.min}" data-max="${p.max}" data-step="${p.step}" data-comma="${p.dec ? "1" : ""}">
               <button class="step-btn" data-dir="-1" aria-label="Diminuir ${p.label}">−</button>
-              <strong class="step-val vit-stepval" data-value="${vitValues[p.key]}">${p.dec ? vitValues[p.key].toFixed(1).replace(".", ",") : vitValues[p.key]}</strong>
+              <input class="step-val vit-stepval" type="text" inputmode="decimal" aria-label="${p.label} em ${p.unit}" value="${p.dec ? vitValues[p.key].toFixed(1).replace(".", ",") : vitValues[p.key]}">
               <button class="step-btn" data-dir="1" aria-label="Aumentar ${p.label}">+</button>
             </div>
           </div>
@@ -171,13 +171,13 @@ function renderVitais(content) {
         <div class="bp-inputs">
           <div class="stepper stepper--sm" data-min="60" data-max="220" data-step="1" data-key="pas">
             <button class="step-btn" data-dir="-1" aria-label="Diminuir sistólica">−</button>
-            <strong class="step-val vit-stepval" data-value="${vitValues.pas}">${vitValues.pas}</strong>
+            <input class="step-val vit-stepval" type="text" inputmode="numeric" aria-label="Pressão sistólica em mmHg" value="${vitValues.pas}">
             <button class="step-btn" data-dir="1" aria-label="Aumentar sistólica">+</button>
           </div>
           <span class="bp-sep">/</span>
           <div class="stepper stepper--sm" data-min="30" data-max="140" data-step="1" data-key="pad">
             <button class="step-btn" data-dir="-1" aria-label="Diminuir diastólica">−</button>
-            <strong class="step-val vit-stepval" data-value="${vitValues.pad}">${vitValues.pad}</strong>
+            <input class="step-val vit-stepval" type="text" inputmode="numeric" aria-label="Pressão diastólica em mmHg" value="${vitValues.pad}">
             <button class="step-btn" data-dir="1" aria-label="Aumentar diastólica">+</button>
           </div>
         </div>
@@ -220,12 +220,17 @@ function bindVitSteppers(content) {
     const max = parseFloat(stepper.dataset.max);
     const step = parseFloat(stepper.dataset.step);
     const comma = stepper.dataset.comma === "1";
-    const setVal = (v) => {
+    const fmt = (v) => (comma ? v.toFixed(1).replace(".", ",") : String(v));
+    const parse = (txt) => {
+      const n = parseFloat(String(txt).replace(",", "."));
+      return isNaN(n) ? NaN : n;
+    };
+    const setVal = (v, opts = {}) => {
+      if (isNaN(v)) v = min;
       v = Math.min(Math.max(v, min), max);
       v = Math.round(v * 10) / 10;
       if (key) vitValues[key] = v;
-      val.dataset.value = v;
-      val.textContent = comma ? v.toFixed(1).replace(".", ",") : v;
+      val.value = fmt(v);
       val.classList.remove("is-bumping");
       void val.offsetWidth;
       val.classList.add("is-bumping");
@@ -244,10 +249,36 @@ function bindVitSteppers(content) {
     };
     stepper.querySelectorAll(".step-btn").forEach((btn) =>
       btn.addEventListener("click", () => {
-        let v = parseFloat(val.dataset.value) + parseInt(btn.dataset.dir, 10) * step;
-        setVal(v);
+        setVal(parse(val.value) + parseInt(btn.dataset.dir, 10) * step);
       })
     );
+    // entrada manual
+    val.addEventListener("input", () => {
+      const n = parse(val.value);
+      if (!isNaN(n)) {
+        const clamped = Math.min(Math.max(n, min), max);
+        if (key) vitValues[key] = clamped;
+        const card = stepper.closest(".vit-card");
+        if (card) {
+          const p = VIT_PARAMS.find((x) => x.key === card.dataset.key);
+          if (p) {
+            const c = p.check(clamped);
+            const badge = card.querySelector(".status-chip");
+            badge.className = `status-chip status-chip--${c ? (c.lvl === "crit" ? "alert" : "warn") : "ok"}`;
+            badge.textContent = c ? c.txt : "Normal";
+          }
+        }
+        updateVitStatus(content);
+      }
+    });
+    val.addEventListener("change", () => setVal(parse(val.value)));
+    val.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        setVal(parse(val.value));
+        val.blur();
+      }
+    });
   });
 }
 
