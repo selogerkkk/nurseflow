@@ -653,12 +653,14 @@
 }
 .app-shell.is-dark .step-btn {
   background: #16233B;
-  color: #E7F0E9;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  color: #FFFFFF;
+  font-weight: 800;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 .app-shell.is-dark .step-btn:hover {
   background: var(--emerald);
   color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 .app-shell.is-dark .step-val {
   color: #E7F0E9;
