@@ -1301,6 +1301,42 @@
   .os-list { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
+  .mp-card .med-tabs {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    border-bottom: none;
+    gap: 4px;
+    padding-bottom: 10px;
+  }
+  .mp-card .med-tab {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: nowrap;
+    padding: 9px 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(13, 43, 78, 0.08);
+  }
+  .mp-card .med-tab.is-active {
+    background: var(--emerald-soft);
+    border-color: rgba(22, 179, 112, 0.25);
+  }
+  .mp-card .med-tab-ink { display: none; }
+  .app-shell.is-dark .mp-card .med-tab { border-color: rgba(255, 255, 255, 0.1); }
+  .app-shell.is-dark .mp-card .med-tab.is-active { background: rgba(22, 179, 112, 0.14); }
+
+  .beira-tabs-card .med-tabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    -ms-overflow-style: none;
+  }
+  .beira-tabs-card .med-tabs::-webkit-scrollbar { display: none; }
+  .beira-tabs-card .med-tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    scroll-snap-align: start;
+  }
   .os-bar { flex-direction: column; align-items: stretch; }
   .os-actions { width: 100%; }
   .os-actions .btn { flex: 1; justify-content: center; }
@@ -2275,17 +2311,17 @@
 
 .vit-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin-bottom: 18px;
 }
-.vit-card { display: flex; flex-direction: column; gap: 10px; }
-.vit-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.vit-label { font-size: 12px; font-weight: 700; color: var(--petrol); }
+.vit-card { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.vit-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.vit-label { font-size: 12px; font-weight: 700; color: var(--petrol); min-width: 0; }
 .vit-label em { font-style: normal; color: var(--gray-400); font-weight: 600; }
-.vit-value-row { display: flex; justify-content: center; }
+.vit-value-row { display: flex; justify-content: center; min-width: 0; }
 .vit-stepval { font-size: 19px; min-width: 58px; }
-.vit-spark { width: 100%; height: 34px; display: block; }
+.vit-spark { width: 100%; height: 34px; display: block; max-width: 100%; }
 .vit-spark--bp { margin-top: 6px; }
 .vit-card--bp .bp-inputs { justify-content: center; }
 
@@ -2312,9 +2348,12 @@
 .app-shell.is-dark .vit-last { color: #8FA6BC; }
 
 @media (max-width: 1120px) {
-  .vit-grid { grid-template-columns: repeat(2, 1fr); }
+  .vit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px) {
-  .vit-grid { grid-template-columns: 1fr; }
+  .vit-grid { grid-template-columns: minmax(0, 1fr); }
   .vit-head { flex-direction: column; align-items: stretch; }
+  .vit-card--bp .bp-inputs { flex-wrap: wrap; justify-content: center; }
+  .vit-actions { flex-direction: column; align-items: stretch; }
+  .vit-actions .btn { justify-content: center; }
 }

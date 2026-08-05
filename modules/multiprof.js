@@ -169,10 +169,17 @@ function renderMultiprof(content) {
       tabs.forEach((t) => {
         const on = t === tab;
         t.classList.toggle("is-active", on);
-        t.setAttribute("aria-selected", on);
+        t.setAttribute("aria-selected", String(on));
       });
-      sys.$$(".med-panel", content).forEach((p) => p.classList.toggle("is-active", p.id === "mp-panel-" + mpActiveTab));
       moveInk(tab);
+      // garante a aba ativa visível no scroll horizontal mobile
+      const tabsBoxEl = tab.closest(".med-tabs");
+      if (tabsBoxEl) {
+        const tabsBox = tabsBoxEl.getBoundingClientRect();
+        const tabBox = tab.getBoundingClientRect();
+        if (tabBox.left < tabsBox.left) tabsBoxEl.scrollLeft -= (tabsBox.left - tabBox.left) + 8;
+        else if (tabBox.right > tabsBox.right) tabsBoxEl.scrollLeft += (tabBox.right - tabsBox.right) + 8;
+      }
     })
   );
   const bindInk = () => {
