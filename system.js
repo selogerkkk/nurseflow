@@ -110,7 +110,10 @@ function renderNav() {
       </div>`
   ).join("");
   sys.$$(".sys-item", nav).forEach((btn) =>
-    btn.addEventListener("click", () => setModule(btn.dataset.module))
+    btn.addEventListener("click", () => {
+      setModule(btn.dataset.module);
+      closeSide();
+    })
   );
 }
 
